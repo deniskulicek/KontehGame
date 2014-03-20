@@ -1,1 +1,4 @@
-# TODO Konteh game
+KontehGame
+==========
+
+PandaJS
