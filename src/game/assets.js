@@ -7,8 +7,13 @@ game.module(
 .body(function() {
 
 // Sprites
+/*
 game.addAsset('media/player1.png');
 game.addAsset('media/player2.png');
+*/
+game.addAsset('media/cika.png');
+game.addAsset('media/cika2.png');
+
 game.addAsset('media/logo2.png');
 game.addAsset('media/logo1.png');
 game.addAsset('media/cloud4.png');

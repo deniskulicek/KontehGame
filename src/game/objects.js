@@ -13,8 +13,8 @@ Player = game.Class.extend({
         var x = game.system.width / 2;
         var y = 500;
         this.sprite = new game.MovieClip([
-            game.Texture.fromImage('media/player1.png'),
-            game.Texture.fromImage('media/player2.png')
+            game.Texture.fromImage('media/cika.png'),
+            game.Texture.fromImage('media/cika2.png')
         ]);
         this.sprite.position.x = x;
         this.sprite.position.y = y;
@@ -31,7 +31,8 @@ Player = game.Class.extend({
             collisionGroup: 1,
         });
         this.body.collide = this.collide.bind(this);
-        var shape = new game.Rectangle(128+4, 48-4-8);
+        //var shape = new game.Rectangle(128+4, 48-4-8);
+        var shape = new game.Circle(58);
         this.body.addShape(shape);
         game.scene.world.addBody(this.body);
 
@@ -59,11 +60,11 @@ Player = game.Class.extend({
 });
 
 Gap = game.Class.extend({
-    groundTop: 800,
+    groundTop: 1000,
     width: 132,
     minY: 150,
     maxY: 550,
-    height: 232,
+    height: 250,
     speed: -300,
 
     init: function() {
@@ -73,7 +74,7 @@ Gap = game.Class.extend({
         this.topBody = new game.Body({
             position: {x: game.system.width + this.width / 2, y: topHeight / 2},
             velocity: {x: this.speed},
-            collisionGroup: 0
+            collisionGroup: 0 //switch back to 0
         });
         var topShape = new game.Rectangle(this.width, topHeight);
         this.topBody.addShape(topShape);
@@ -90,7 +91,7 @@ Gap = game.Class.extend({
         game.scene.world.addBody(this.bottomBody);
 
         this.goalBody = new game.Body({
-            position: {x: game.system.width + this.width / 2 + this.width + game.scene.player.body.shape.width, y: topHeight + this.height / 2},
+            position: {x: game.system.width + this.width / 2 + this.width, y: topHeight + this.height / 2},
             velocity: {x: this.speed},
             collisionGroup: 1,
             collideAgainst: 1
@@ -98,9 +99,10 @@ Gap = game.Class.extend({
         this.goalBody.collide = function() {
             game.scene.world.removeBody(this);
             game.scene.addScore();
+            console.log('colided');
             return false;
         };
-        var goalShape = new game.Rectangle(this.width, this.height + game.scene.player.body.shape.height);
+        var goalShape = new game.Rectangle(this.width, this.height);
         this.goalBody.addShape(goalShape);
         game.scene.world.addBody(this.goalBody);
 
@@ -176,6 +178,18 @@ Logo = game.Class.extend({
             .onComplete(this.container.remove.bind(this));
         tween.start();
     }
+});
+
+Hit = game.Class.extend({
+    init: function() {
+        var tween;
+        
+    },
+
+    flash: function() {
+
+    }
+
 });
 
 });
