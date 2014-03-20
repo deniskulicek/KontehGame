@@ -33,7 +33,6 @@ SceneGame = game.Scene.extend({
         
         this.gapContainer = new game.Container();
         this.stage.addChild(this.gapContainer);
-        //this.addParallax(800, 'media/ground.png', -300);
 
         this.player = new Player();
         

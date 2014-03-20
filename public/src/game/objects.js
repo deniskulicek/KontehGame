@@ -99,7 +99,6 @@ Gap = game.Class.extend({
         this.goalBody.collide = function() {
             game.scene.world.removeBody(this);
             game.scene.addScore();
-            console.log('colided');
             return false;
         };
         var goalShape = new game.Rectangle(this.width, this.height);
