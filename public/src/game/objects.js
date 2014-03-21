@@ -32,7 +32,7 @@ Player = game.Class.extend({
         });
         this.body.collide = this.collide.bind(this);
         //var shape = new game.Rectangle(128+4, 48-4-8);
-        var shape = new game.Circle(58);
+        var shape = new game.Circle(55);
         this.body.addShape(shape);
         game.scene.world.addBody(this.body);
 
@@ -40,6 +40,7 @@ Player = game.Class.extend({
 
     collide: function() {
         if(!game.scene.ended) {
+            var hitEffect = new Hit(100);
             game.scene.gameOver();
             this.body.velocity.y = -200;
         }
@@ -56,6 +57,7 @@ Player = game.Class.extend({
         if(this.body.position.y < 0) return;
         this.body.velocity.y = this.jumpPower;
         game.analytics.event('jump');
+
     }
 });
 
@@ -64,7 +66,7 @@ Gap = game.Class.extend({
     width: 132,
     minY: 150,
     maxY: 550,
-    height: 250,
+    height: 255,
     speed: -300,
 
     init: function() {
@@ -168,6 +170,11 @@ Logo = game.Class.extend({
             .yoyo()
             .start();
 
+        var clickToStart = new game.BitmapText('Click to start...', {font: '40 Pixel'});
+        clickToStart.position.x = game.system.width / 2 - clickToStart.textWidth / 2;
+        clickToStart.position.y = 150;
+        this.container.addChild(clickToStart);
+
         game.scene.stage.addChild(this.container);
     },
 
@@ -180,13 +187,30 @@ Logo = game.Class.extend({
 });
 
 Hit = game.Class.extend({
-    init: function() {
-        var tween;
-        
-    },
+    overlay: null,
 
-    flash: function() {
+    init: function(timeUp) {
+        if(timeUp === undefined)
+            timeUp = 200;
 
+        this.container = new game.Container();
+
+        this.overlay = new game.Graphics();
+        this.overlay.beginFill(0xffffff);
+        this.overlay.drawRect(0,0,game.system.width, game.system.height);
+        this.overlay.endFill();
+        //this.overlay.visible = false;
+        //var overlay = new game.Rectangle(game.system.width, game.system.height);
+        //overlay.beginFill(0xff00ff);
+        this.container.addChild(this.overlay);
+
+        game.scene.stage.addChild(this.container);
+        console.log('HIT');
+        var tween = new game.Tween(this.container)
+            .to({alpha: 50}, 200)
+            .to({alpha: 0}, 500)
+            .onComplete(this.container.remove.bind(this));
+        tween.start();
     }
 
 });

@@ -36,9 +36,9 @@ game.Analytics = game.Class.extend({
         @param {String} category
         @param {String} action
     **/
-    event: function(category, action) {
+    event: function(category, action, value) {
         if(!navigator.onLine) return;
-        ga('send', 'event', category, action);
+        ga('send', 'event', category, action, value);
     }
 });
 

@@ -48,6 +48,8 @@ SceneGame = game.Scene.extend({
         this.scoreText.position.x = game.system.width / 2 - this.scoreText.textWidth / 2;
         this.stage.addChild(this.scoreText);
 
+        var hitEffect = new Hit();
+
     },
 
     spawnGap: function() {
@@ -87,6 +89,7 @@ SceneGame = game.Scene.extend({
         var box = new game.Sprite(game.system.width / 2, game.system.height / 2, 'media/gameover.png', {anchor: {x:0.5, y:0.5}});
 
         var highScore = parseInt(game.storage.get('highScore'),10) || 0;
+        game.analytics.event('score', this.score);
         if(this.score > highScore) game.storage.set('highScore', this.score);
 
         var highScoreText = new game.BitmapText(highScore.toString(), {font: 'Pixel'});
