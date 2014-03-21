@@ -1,1 +1,1 @@
-web: supervisor web.js
+web: node web.js
