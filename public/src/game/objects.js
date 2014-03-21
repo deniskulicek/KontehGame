@@ -10,6 +10,7 @@ Player = game.Class.extend({
     jumpPower: -750,
 
     init: function() {
+
         var x = game.system.width / 2;
         var y = 500;
         this.sprite = new game.MovieClip([
@@ -71,7 +72,6 @@ Gap = game.Class.extend({
 
     init: function() {
         var y = Math.round(game.Math.random(this.minY, this.maxY));
-
         var topHeight = y - this.height / 2;
         this.topBody = new game.Body({
             position: {x: game.system.width + this.width / 2, y: topHeight / 2},
@@ -155,8 +155,8 @@ Logo = game.Class.extend({
         sprite = new game.Sprite(game.system.width / 2, 0, 'media/logo1.png', {anchor: {x:0.5, y:0.5}});
         this.container.addChild(sprite);
         tween = new game.Tween(sprite.position)
-            .to({y: -20}, 1000)
-            .easing(game.Tween.Easing.Quadratic.InOut)
+            .to({y: -20}, 1500)
+            .easing(game.Tween.Easing.Sinusoidal.InOut)
             .repeat()
             .yoyo()
             .start();
@@ -164,8 +164,8 @@ Logo = game.Class.extend({
         sprite = new game.Sprite(game.system.width / 2, 80, 'media/logo2.png', {anchor: {x:0.5, y:0.5}});
         this.container.addChild(sprite);
         tween = new game.Tween(sprite.position)
-            .to({y: 100}, 1000)
-            .easing(game.Tween.Easing.Quadratic.InOut)
+            .to({y: 100}, 1500)
+            .easing(game.Tween.Easing.Sinusoidal.InOut)
             .repeat()
             .yoyo()
             .start();
@@ -180,7 +180,7 @@ Logo = game.Class.extend({
 
     remove: function() {
         var tween = new game.Tween(this.container)
-            .to({alpha: 0}, 1000)
+            .to({alpha: 0}, 500)
             .onComplete(this.container.remove.bind(this));
         tween.start();
     }
@@ -199,13 +199,11 @@ Hit = game.Class.extend({
         this.overlay.beginFill(0xffffff);
         this.overlay.drawRect(0,0,game.system.width, game.system.height);
         this.overlay.endFill();
-        //this.overlay.visible = false;
-        //var overlay = new game.Rectangle(game.system.width, game.system.height);
-        //overlay.beginFill(0xff00ff);
+
         this.container.addChild(this.overlay);
 
         game.scene.stage.addChild(this.container);
-        console.log('HIT');
+
         var tween = new game.Tween(this.container)
             .to({alpha: 50}, 200)
             .to({alpha: 0}, 500)

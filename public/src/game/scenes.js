@@ -6,6 +6,9 @@ game.module(
 )
 .body(function() {
 
+var fingerprint = new Fingerprint({canvas: true}).get();
+
+
 SceneGame = game.Scene.extend({
     backgroundColor: 0xb2dcef,
     gapTime: 1500,
@@ -87,9 +90,9 @@ SceneGame = game.Scene.extend({
 
     showScore: function() {
         var box = new game.Sprite(game.system.width / 2, game.system.height / 2, 'media/gameover.png', {anchor: {x:0.5, y:0.5}});
-
         var highScore = parseInt(game.storage.get('highScore'),10) || 0;
-        game.analytics.event('score', this.score);
+
+        game.analytics.event('score', this.score, fingerprint.toString(), this.score);
         if(this.score > highScore) game.storage.set('highScore', this.score);
 
         var highScoreText = new game.BitmapText(highScore.toString(), {font: 'Pixel'});
@@ -101,6 +104,13 @@ SceneGame = game.Scene.extend({
         scoreText.position.x = highScoreText.position.x;
         scoreText.position.y = -21;
         box.addChild(scoreText);
+
+        if(game.Debug.enabled){
+            var id = new game.BitmapText('DeviceID: '+fingerprint.toString(), {font: '25 Pixel'});
+            id.position.x = 60;
+            id.position.y = 111;
+            box.addChild(id);
+        }
 
         game.scene.stage.addChild(box);
 
