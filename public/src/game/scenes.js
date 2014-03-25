@@ -2,7 +2,8 @@ game.module(
     'game.scenes'
 )
 .require(
-    'engine.scene'
+    'engine.scene',
+    'engine.keyboard'
 )
 .body(function() {
 
@@ -77,6 +78,19 @@ SceneGame = game.Scene.extend({
         this.stage.addChild(parallax);
     },
 
+    keydown: function() {
+        if(game.keyboard.keysDown.SPACE === true){
+            if(this.ended) return;
+            if(this.player.body.mass === 0) {
+                game.analytics.event('play');
+                this.player.body.mass = 1;
+                this.logo.remove();
+                this.addTimer(this.gapTime, this.spawnGap.bind(this), true);
+            }
+            this.player.jump();
+        }
+    },
+
     mousedown: function() {
         if(this.ended) return;
         if(this.player.body.mass === 0) {
@@ -91,9 +105,14 @@ SceneGame = game.Scene.extend({
     showScore: function() {
         var box = new game.Sprite(game.system.width / 2, game.system.height / 2, 'media/gameover.png', {anchor: {x:0.5, y:0.5}});
         var highScore = parseInt(game.storage.get('highScore'),10) || 0;
-
+        var newHigh = false;
         game.analytics.event('score', this.score, fingerprint.toString(), this.score);
-        if(this.score > highScore) game.storage.set('highScore', this.score);
+
+        if(this.score > highScore) {
+            game.storage.set('highScore', this.score);
+            highScore = this.score;
+            newHigh = true;
+        }
 
         var highScoreText = new game.BitmapText(highScore.toString(), {font: 'Pixel'});
         highScoreText.position.x = 27;
@@ -132,7 +151,7 @@ SceneGame = game.Scene.extend({
                 scoreText.setText(scoreCounter.toString());
                 if(scoreCounter >= game.scene.score) {
                     this.repeat = false;
-                    if(game.scene.score > highScore) {
+                    if(newHigh) {
                         var newBox = new game.Sprite(-208, 59, 'media/new.png');
                         box.addChild(newBox);
                     }
