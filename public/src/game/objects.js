@@ -170,10 +170,15 @@ Logo = game.Class.extend({
             .yoyo()
             .start();
 
-        var clickToStart = new game.BitmapText('Click, touch or press space to start...', {font: '40 Pixel'});
+        var clickToStart = new game.BitmapText('Click, or press space to start...', {font: '40 Pixel'});
         clickToStart.position.x = game.system.width / 2 - clickToStart.textWidth / 2;
         clickToStart.position.y = 150;
         this.container.addChild(clickToStart);
+
+        var madeBy = new game.BitmapText('Made by: Denis Kulicek\nGraphics by: Dusko Trifkovic             Engine: PandaJS', {font: '27 Pixel'});
+        madeBy.position.x = 25;
+        madeBy.position.y = 700;
+        this.container.addChild(madeBy);
 
         game.scene.stage.addChild(this.container);
     },
