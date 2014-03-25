@@ -170,7 +170,7 @@ Logo = game.Class.extend({
             .yoyo()
             .start();
 
-        var clickToStart = new game.BitmapText('Click to start...', {font: '40 Pixel'});
+        var clickToStart = new game.BitmapText('Click, touch or press space to start...', {font: '40 Pixel'});
         clickToStart.position.x = game.system.width / 2 - clickToStart.textWidth / 2;
         clickToStart.position.y = 150;
         this.container.addChild(clickToStart);
