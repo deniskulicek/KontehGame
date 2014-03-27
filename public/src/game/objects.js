@@ -32,7 +32,6 @@ Player = game.Class.extend({
             collisionGroup: 1,
         });
         this.body.collide = this.collide.bind(this);
-        //var shape = new game.Rectangle(128, 50);
         var shape = new game.Circle(40);
         this.body.addShape(shape);
         game.scene.world.addBody(this.body);
