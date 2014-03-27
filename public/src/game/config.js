@@ -3,7 +3,7 @@ pandaConfig = {
     outputFile: 'game.min.js',
     sitelock: '',
     analytics: {
-		id: 'UA-49110996-1'
+		id: ANALYTICS_ID
     },
     storage: {
 		id: 'org.konteh.game'

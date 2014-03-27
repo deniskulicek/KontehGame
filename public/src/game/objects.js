@@ -32,8 +32,8 @@ Player = game.Class.extend({
             collisionGroup: 1,
         });
         this.body.collide = this.collide.bind(this);
-        //var shape = new game.Rectangle(128+4, 48-4-8);
-        var shape = new game.Circle(55);
+        //var shape = new game.Rectangle(128, 50);
+        var shape = new game.Circle(40);
         this.body.addShape(shape);
         game.scene.world.addBody(this.body);
 
@@ -67,7 +67,7 @@ Gap = game.Class.extend({
     width: 132,
     minY: 150,
     maxY: 550,
-    height: 260,
+    height: 240,
     speed: -300,
 
     init: function() {
