@@ -56,7 +56,7 @@ Player = game.Class.extend({
     jump: function() {
         if(this.body.position.y < 0) return;
         this.body.velocity.y = this.jumpPower;
-        game.analytics.event('jump');
+        //game.analytics.event('jump');
 
     }
 });
