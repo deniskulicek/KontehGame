@@ -66,7 +66,7 @@ Gap = game.Class.extend({
     width: 132,
     minY: 150,
     maxY: 550,
-    height: 240,
+    height: 250,
     speed: -300,
 
     init: function() {
