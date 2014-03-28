@@ -1,6 +1,6 @@
 KontehGame
 
-Live demo on: http://konteh.herokuapp.com
+Live demo on: http://konteh.herokuapp.com?github
 ==========
 
 PandaJS
